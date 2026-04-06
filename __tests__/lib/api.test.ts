@@ -31,7 +31,7 @@ describe("API Client", () => {
       expect(result).toEqual(mockData);
       expect(mockFetch).toHaveBeenCalledWith(
         "http://localhost:9001/api/dashboard/stories",
-        { cache: "no-store" }
+        { cache: "no-store", headers: {} }
       );
     });
 
@@ -67,7 +67,11 @@ describe("API Client", () => {
         expect.objectContaining({
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: "test query", session_id: "session-123" }),
+          body: JSON.stringify({ 
+            query: "test query", 
+            session_id: "session-123",
+            history: []
+          }),
         })
       );
     });
@@ -82,7 +86,7 @@ describe("API Client", () => {
       expect(mockFetch).toHaveBeenCalledWith(
         "http://localhost:9001/api/chat",
         expect.objectContaining({
-          body: JSON.stringify({ query: "test query", session_id: "" }),
+          body: JSON.stringify({ query: "test query", session_id: "", history: [] }),
         })
       );
     });
