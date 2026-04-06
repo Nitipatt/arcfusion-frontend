@@ -68,7 +68,8 @@ function computeTimeAgo(createdAt: string | null, fallback: string): string {
 
 import { useConfirm } from "@/hooks/useConfirm";
 
-function transformForMiniCard(originalConfig: Record<string, any>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function transformForMiniCard(originalConfig: any) {
   // Deep clone to avoid mutating the original object
   const config = JSON.parse(JSON.stringify(originalConfig));
 
@@ -94,6 +95,7 @@ function transformForMiniCard(originalConfig: Record<string, any>) {
 
   // Optimize axes for readability
   if (Array.isArray(config.xAxis)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config.xAxis.forEach((axis: any) => {
       axis.name = ""; // Remove axis names
       axis.axisLabel = { show: false };
@@ -110,6 +112,7 @@ function transformForMiniCard(originalConfig: Record<string, any>) {
   }
 
   if (Array.isArray(config.yAxis)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config.yAxis.forEach((axis: any) => {
       axis.name = "";
       axis.axisLabel = { show: false };
@@ -127,6 +130,7 @@ function transformForMiniCard(originalConfig: Record<string, any>) {
   
   // Clean up series labels (e.g. pie chart labels)
   if (Array.isArray(config.series)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config.series.forEach((series: any) => {
       if (series.type === 'pie' || series.type === 'donut') {
         series.label = { show: false };

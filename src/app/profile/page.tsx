@@ -30,8 +30,8 @@ export default function ProfilePage() {
       setProfileMessage({ text: "Profile updated successfully!", type: "success" });
       setProfilePassword("");
       setProfileConfirmPassword("");
-    } catch (err: any) {
-      setProfileMessage({ text: err.message, type: "error" });
+    } catch (err: unknown) {
+      setProfileMessage({ text: err instanceof Error ? err.message : "An error occurred", type: "error" });
     } finally {
       setProfileSaving(false);
     }

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Sparkles, MessageSquarePlus } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { HeroSearch } from "@/components/dashboard/HeroSearch";
 import { StoryCard, OlderStoryCard } from "@/components/dashboard/StoryCard";
 import { Skeleton } from "@/components/ui/skeleton";

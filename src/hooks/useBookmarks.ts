@@ -36,7 +36,7 @@ export function useBookmarks() {
   const toggleBookmark = (story: StoryCardType) => {
     try {
       const saved = localStorage.getItem(storageKey);
-      let currentBookmarks = saved ? JSON.parse(saved) : [];
+      const currentBookmarks = saved ? JSON.parse(saved) : [];
       
       let newBookmarks;
       if (currentBookmarks.some((b: StoryCardType) => b.id === story.id)) {

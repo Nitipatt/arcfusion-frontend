@@ -7,7 +7,7 @@ import { loginApi, getMeApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Cpu } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -25,8 +25,8 @@ export default function LoginPage() {
       const user = await getMeApi();
       setUser(user);
       router.push("/");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An error occurred");
     }
   };
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
       <div className="w-full max-w-sm rounded-[24px] border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50">
         <div className="flex items-center justify-center space-x-2 pb-6">
           <div className="flex h-10 w-10 overflow-hidden items-center justify-center rounded-xl bg-white shadow-md border border-slate-100">
-            <img src="/logo.png" alt="ArcFusion Logo" className="w-full h-full object-contain p-1" />
+            <Image src="/logo.png" alt="ArcFusion Logo" width={40} height={40} className="w-full h-full object-contain p-1" />
           </div>
           <span className="text-xl font-bold text-slate-800">
             ArcFusion
@@ -69,7 +69,7 @@ export default function LoginPage() {
           </Button>
         </form>
         <p className="mt-6 text-center text-sm text-slate-500">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/register" className="font-semibold text-corporate-blue transition-colors hover:text-corporate-blue-dark">
             Register now
           </Link>

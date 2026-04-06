@@ -204,7 +204,7 @@ export function ShareModal({ open, onOpenChange, data, storyId }: ShareModalProp
               </p>
             )}
             <div className="space-y-1">
-              {recentShares.map((contact: any, index: number) => {
+              {recentShares.map((contact, index: number) => {
                 const isSelected = selectedEmails.has(contact.email);
                 return (
                   <div

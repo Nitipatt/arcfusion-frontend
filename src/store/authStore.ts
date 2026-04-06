@@ -6,7 +6,7 @@ export interface User {
   name: string;
   email: string;
   credits: number;
-  recent_share_emails: any[];
+  recent_share_emails: { email: string; name?: string; avatar?: string }[];
   created_at: string;
 }
 

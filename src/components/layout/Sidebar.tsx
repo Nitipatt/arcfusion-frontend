@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   Home,
   PieChart,
@@ -61,7 +62,7 @@ export function Sidebar() {
         onClick={() => router.push("/")}
         className="mb-10 flex h-10 w-10 overflow-hidden items-center justify-center rounded-xl bg-white transition-all hover:bg-slate-50 hover:scale-105 shadow-sm"
       >
-        <img src="/logo.png" alt="ArcFusion Logo" className="w-full h-full object-contain p-1" />
+        <Image src="/logo.png" alt="ArcFusion Logo" width={40} height={40} className="w-full h-full object-contain p-1" />
       </button>
 
       {/* Navigation */}

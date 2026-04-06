@@ -1,0 +1,1 @@
+__mocks__/next/dynamic.tsx(3,39): error TS2347: Untyped function calls may not accept type arguments.

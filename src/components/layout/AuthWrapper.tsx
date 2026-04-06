@@ -10,7 +10,7 @@ import { GlobalConfirmDialog } from "@/components/layout/GlobalConfirmDialog";
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { token, user } = useAuthStore();
+  const { token } = useAuthStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
