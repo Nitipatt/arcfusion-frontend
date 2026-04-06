@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ArcFusion Frontend
 
-## Getting Started
+This repository contains the frontend application for ArcFusion, an AI-powered Data Analytics Workspace. It is built using modern web technologies to provide a dynamic and responsive user interface for conversational analytics.
 
-First, run the development server:
+## Comprehensive Architecture Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The frontend is a single-page application built with Next.js (App Router) and React. It serves as the primary gateway for users to interact with their data, offering dashboards, chat interfaces, and settings management.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Key Technologies
+- **Framework**: Next.js 14 (App Router)
+- **State Management**: Zustand
+- **Styling**: Tailwind CSS, Shadcn UI, Headless UI (Base UI)
+- **Charting**: Apache ECharts (`echarts-for-react`)
+- **Icons**: Lucide React
+- **Testing**: Jest, React Testing Library
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Component Architecture
+1. **App Router (`src/app`)**: Implements pages like `/dashboard`, `/stories`, `/credits`, `/login`, etc.
+2. **Components (`src/components`)**: Modular UI components.
+    - `charts/`: Wrapper components evaluating dynamic ECharts configurations.
+    - `dashboard/`: Views and cards for the main interface.
+    - `thread/`: Conversational nodes mapping AI answers.
+    - `ui/`: Core reusable components based on Shadcn UI.
+3. **State Management (`src/store`)**: Zustand stores handling contexts like user session (`authStore.ts`), confirmations (`confirmStore.ts`), and global settings.
+4. **Hooks (`src/hooks`)**: Custom React hooks handling business logic (e.g., `useBookmarks`, `useConfirm`).
+5. **API Layer (`src/lib`)**: Centralized HTTP fetch clients communicating with the primary Backend API.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Run It
 
-## Learn More
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
 
-To learn more about Next.js, take a look at the following resources:
+### Local Development Setup
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Environment Variables**:
+   Copy the example environment file or create `.env.local` to configure the API URL:
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:8000/api
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Run the Development Server**:
+   ```bash
+   npm run dev
+   ```
+   The application will be accessible at `http://localhost:3000`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Build for Production**:
+   ```bash
+   npm run build
+   npm run start
+   ```
