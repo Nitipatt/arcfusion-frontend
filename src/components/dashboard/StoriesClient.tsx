@@ -102,8 +102,8 @@ export function StoriesClient() {
               story.
             </p>
             <button
-              onClick={() => router.push(`/stories/${crypto.randomUUID()}?q=`)}
-              className="inline-flex items-center gap-2 rounded-xl bg-corporate-blue px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-corporate-blue-dark hover:shadow-lg"
+              onClick={() => router.push(`/stories/${generateUUID()}?q=`)}
+              className="inline-flex items-center gap-2 rounded-xl bg-corporate-blue px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-corporate-blue-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-corporate-blue/50"
             >
               <MessageSquarePlus className="h-4 w-4" />
               Ask your first question
