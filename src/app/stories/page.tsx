@@ -1,41 +1,11 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { fetchConnectionsServer } from "@/lib/serverApi";
+import { StoriesClient } from "@/components/dashboard/StoriesClient";
 import { Database } from "lucide-react";
 import Link from "next/link";
-import { DashboardClient } from "@/components/dashboard/DashboardClient";
-import { fetchConnections } from "@/lib/api";
-import { Skeleton } from "@/components/ui/skeleton";
 
-export default function DashboardPage() {
-  const [hasConnection, setHasConnection] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    fetchConnections()
-      .then((conns) => setHasConnection(conns.length > 0))
-      .catch(() => setHasConnection(false));
-  }, []);
-
-  // Loading state while checking connections
-  if (hasConnection === null) {
-    return (
-      <div className="ml-[72px] min-h-screen">
-        <div className="mx-auto max-w-6xl px-8 py-8">
-          <div className="flex items-start justify-between mb-10">
-            <Skeleton className="h-9 w-52" />
-            <Skeleton className="h-10 w-72 rounded-xl" />
-          </div>
-          <Skeleton className="h-[180px] w-full rounded-2xl mb-14" />
-          <Skeleton className="h-6 w-40 mb-5" />
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {[0, 1, 2].map((i) => (
-              <Skeleton key={i} className="h-[260px] rounded-2xl" />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
+export default async function StoriesPage() {
+  const conns = await fetchConnectionsServer();
+  const hasConnection = conns.length > 0;
 
   if (!hasConnection) {
     return (
@@ -64,5 +34,5 @@ export default function DashboardPage() {
     );
   }
 
-  return <DashboardClient />;
+  return <StoriesClient />;
 }
