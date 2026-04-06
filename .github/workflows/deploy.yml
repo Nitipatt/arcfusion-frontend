@@ -1,55 +1,32 @@
-name: Deploy Frontend to VPS
-
+name: Deploy Frontend
 on:
-  workflow_run:
-    workflows: ["Frontend CI"]
-    types:
-      - completed
-    branches: [main]
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy Repository to VPS
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          source: "."
+          target: "/opt/arcfusion/frontend"
+          rm: true
+
+      - name: Trigger Remote Docker Restart
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            set -e
-
-            APP_DIR="/opt/arcfusion-frontend"
-            
-            mkdir -p "$APP_DIR"
-            cd "$APP_DIR"
-            git config --global --add safe.directory "$APP_DIR"
-            
-            if [ ! -d ".git" ]; then
-              git init
-              git remote add origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/${{ github.repository }}.git
-            fi
-            
-            git fetch origin main
-            git reset --hard origin/main
-
-            docker build -t arcfusion-frontend .
-
-            docker stop arcfusion-frontend 2>/dev/null || true
-            docker rm arcfusion-frontend 2>/dev/null || true
-
-            docker network create arcfusion-net 2>/dev/null || true
-
-            docker run -d \
-              --name arcfusion-frontend \
-              --network arcfusion-net \
-              --restart unless-stopped \
-              -p 9000:3000 \
-              -e NEXT_PUBLIC_API_URL=http://backend:8000 \
-              arcfusion-frontend
-
-            docker image prune -f
-            echo "Frontend Deployment completed!"
+            cd /opt/arcfusion
+            docker compose up -d --build frontend
