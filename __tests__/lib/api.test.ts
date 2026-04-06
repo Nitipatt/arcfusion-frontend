@@ -30,7 +30,7 @@ describe("API Client", () => {
       const result = await fetchStories();
       expect(result).toEqual(mockData);
       expect(mockFetch).toHaveBeenCalledWith(
-        "http://localhost:8000/api/dashboard/stories",
+        "http://localhost:9001/api/dashboard/stories",
         { cache: "no-store" }
       );
     });
@@ -63,7 +63,7 @@ describe("API Client", () => {
       const result = await sendQuery("test query", "session-123");
       expect(result).toEqual(mockResponse);
       expect(mockFetch).toHaveBeenCalledWith(
-        "http://localhost:8000/api/chat",
+        "http://localhost:9001/api/chat",
         expect.objectContaining({
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ describe("API Client", () => {
 
       await sendQuery("test query");
       expect(mockFetch).toHaveBeenCalledWith(
-        "http://localhost:8000/api/chat",
+        "http://localhost:9001/api/chat",
         expect.objectContaining({
           body: JSON.stringify({ query: "test query", session_id: "" }),
         })
@@ -114,7 +114,7 @@ describe("API Client", () => {
 
       expect(result).toEqual(mockBlob);
       expect(mockFetch).toHaveBeenCalledWith(
-        "http://localhost:8000/api/export/slides",
+        "http://localhost:9001/api/export/slides",
         expect.objectContaining({ method: "POST" })
       );
     });
