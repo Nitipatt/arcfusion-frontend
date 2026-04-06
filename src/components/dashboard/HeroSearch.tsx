@@ -7,6 +7,8 @@ import { fetchSuggestions } from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { generateUUID } from "@/lib/utils";
+
 const SUGGESTIONS_CACHE_KEY = "hero_suggestions_cache";
 const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 1 day
 
@@ -63,12 +65,12 @@ export function HeroSearch() {
     e.preventDefault();
     if (!query.trim()) return;
     const encoded = encodeURIComponent(query.trim());
-    router.push(`/stories/${crypto.randomUUID()}?q=${encoded}`);
+    router.push(`/stories/${generateUUID()}?q=${encoded}`);
   };
 
   const handlePromptClick = (prompt: string) => {
     const encoded = encodeURIComponent(prompt);
-    router.push(`/stories/${crypto.randomUUID()}?q=${encoded}`);
+    router.push(`/stories/${generateUUID()}?q=${encoded}`);
   };
 
   return (

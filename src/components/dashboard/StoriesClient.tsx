@@ -7,6 +7,7 @@ import { StoryCard } from "@/components/dashboard/StoryCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { DashboardData } from "@/lib/api";
 import { fetchStories } from "@/lib/api";
+import { generateUUID } from "@/lib/utils";
 
 export function StoriesClient() {
   const router = useRouter();

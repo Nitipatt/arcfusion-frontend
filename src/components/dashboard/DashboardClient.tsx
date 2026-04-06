@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { DashboardData } from "@/lib/api";
 import { fetchStories } from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
+import { generateUUID } from "@/lib/utils";
 
 export function DashboardClient() {
   const router = useRouter();
