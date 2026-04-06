@@ -25,6 +25,11 @@ The frontend is a single-page application built with Next.js (App Router) and Re
 4. **Hooks (`src/hooks`)**: Custom React hooks handling business logic (e.g., `useBookmarks`, `useConfirm`).
 5. **API Layer (`src/lib`)**: Centralized HTTP fetch clients communicating with the primary Backend API.
 
+### Data Flow & Implementation Strategy
+- **Authentication Flow**: The frontend verifies active user sessions directly via proxying calls to the Backend API. Token logic is handled efficiently within API interceptors.
+- **Real-Time Data Visualizations**: The application queries the backend for analytics insights, which retrieves the result JSON. The `echarts` configuration wrappers take the raw data and dynamically render various chart forms based on the data schema.
+- **Server vs Client Components**: Adheres strictly to Next.js 14 paradigms, executing search parameters and heavy lifting inside Server Components wherever possible, while relying on Client Components (`"use client"`) for interactivity (hover states, charts, state management).
+
 ## How to Run It
 
 ### Prerequisites
